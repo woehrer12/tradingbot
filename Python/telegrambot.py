@@ -1,6 +1,13 @@
 import helper.sqlmanager
 import helper.config
 import logging
+import os
+
+if not os.path.isdir('./log'):
+    os.mkdir('./log')
+
+if not os.path.isdir('./userdata'):
+    os.mkdir('./userdata')
 
 conf = helper.config.initconfig()
 Token = conf['telegramtoken']

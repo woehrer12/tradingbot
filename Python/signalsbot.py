@@ -1,6 +1,7 @@
-import helper.binance
-import helper.telegramsend
-import strategies.main
+import mining.Python.helper.binance
+import mining.Python.helper.telegramsend
+import mining.Python.helper.signals
+import mining.Python.strategies.main
 
 import warnings
 
@@ -9,7 +10,7 @@ warnings.filterwarnings('ignore')
 
 listofpairs = []
 
-pairs = helper.binance.get_exchange_info()
+pairs = mining.Python.helper.binance.get_exchange_info()
 
 for pair in pairs['symbols']:
     if 'USDT' in pair['symbol']:
@@ -20,11 +21,11 @@ print(listofpairs)
 
 
 for CurrencyPair in listofpairs:
-    data = helper.binance.get_klines(CurrencyPair['symbol'])
+    data = mining.Python.helper.binance.get_klines(CurrencyPair['symbol'])
 
-    prepaired_data = helper.signals.prepair_data(data)
+    prepaired_data = mining.Python.helper.signals.prepair_data(data)
 
-    data = strategies.main.handler(prepaired_data)
+    data = mining.Python.strategies.main.handler(prepaired_data)
 
     if data['enter_long'].iloc[-1] == 1:
         print('Enter: ' + str(CurrencyPair['symbol']) + ' ' + str(data['strategy'].iloc[-1]))
