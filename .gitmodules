@@ -1,0 +1,3 @@
+[submodule "Python/mining"]
+	path = Python/mining
+	url = https://gitlab.com/woehrer/mining
